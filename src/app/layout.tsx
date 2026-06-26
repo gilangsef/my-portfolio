@@ -7,8 +7,16 @@ import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Gilang Septia | Full Stack Developer",
+  title: "Gilang Septia F | Full Stack Developer",
   description: "Portfolio of Gilang Septia, a Full Stack Developer.",
+  metadataBase: new URL("https://gilangjeylz.my.id"),
+  openGraph: {
+    title: "Gilang Septia | Portfolio",
+    description: "Full Stack Web Developer Portfolio",
+    url: "https://gilangjeylz.my.id",
+    siteName: "Gilang Septia Portfolio",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
