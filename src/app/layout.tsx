@@ -1,6 +1,5 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
-// Kita tidak perlu import font lagi jika sudah menggunakan preset Geist dari Shadcn
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";

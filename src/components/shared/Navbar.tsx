@@ -24,8 +24,16 @@ const NAV_LINKS = [
 export default function Navbar() {
   const { setTheme, theme } = useTheme();
   const [isScrolled, setIsScrolled] = React.useState(false);
-  const [isOpen, setIsOpen] = React.useState(false); // State untuk kontrol menu mobile
+  const [isOpen, setIsOpen] = React.useState(false);
   
+  // State untuk mencegah hydration error pada icon dark mode di mobile
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
+
   // Efek blur saat scroll
   React.useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -35,7 +43,8 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 z-[200] w-full transition-all duration-300 ${
+      // ✅ FIX UTAMA: z-index diturunkan dari z-[200] menjadi z-40
+      className={`fixed top-0 z-40 w-full transition-all duration-300 ${
         isScrolled
           ? "bg-background/80 backdrop-blur-md border-b border-border shadow-sm"
           : "bg-transparent"
@@ -62,16 +71,20 @@ export default function Navbar() {
 
         {/* Actions (Dark Mode & Mobile Menu) */}
         <div className="flex items-center gap-2">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-            className="rounded-full"
-          >
-            <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-            <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            <span className="sr-only">Toggle theme</span>
-          </Button>
+          
+          {/* ✅ FIX KE-2: Hanya render tombol tema jika komponen sudah mounted */}
+          {mounted && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+              className="rounded-full"
+            >
+              <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <span className="sr-only">Toggle theme</span>
+            </Button>
+          )}
 
           {/* Mobile Menu */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -81,9 +94,9 @@ export default function Navbar() {
               </Button>
             </SheetTrigger>
             
-            {/* Lebar menu disesuaikan agar lebih proporsional */}
-            <SheetContent side="right" className="flex flex-col w-70 sm:w-87.5">
-              <SheetHeader className="mt-4 mb-2 text-left">
+            {/* ✅ FIX KE-3: z-50 ditambahkan agar konten sheet selalu di atas header */}
+            <SheetContent side="right" className="flex flex-col w-70 sm:w-87.5 z-50">
+              <SheetHeader className="mt-8 mb-2 text-left">
                 <SheetTitle className="text-xl font-bold tracking-tight">Navigation</SheetTitle>
               </SheetHeader>
               

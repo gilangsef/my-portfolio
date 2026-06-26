@@ -2,7 +2,7 @@ import { supabase } from "@/lib/supabase";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Skills from "@/components/sections/Skills";
-import FeaturedProjects from "@/components/sections/FeaturedProjects"; // <-- KEMBALIKAN KE IMPORT BIASA
+import FeaturedProjects from "@/components/sections/FeaturedProjects"; 
 import Experience from "@/components/sections/Experience";
 import Contact from "@/components/sections/Contact";
 
