@@ -1,10 +1,9 @@
-// src/app/sitemap.ts
 import { MetadataRoute } from 'next'
  
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://gilangjeylz.my.id', // Ganti dengan domain asli
+      url: 'https://gilangjeylz.my.id',
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 1,

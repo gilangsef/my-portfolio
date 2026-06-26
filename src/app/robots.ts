@@ -5,8 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: '/private/',
     },
-    sitemap: 'https://nama-domain-anda.vercel.app/sitemap.xml',
+    sitemap: 'https://gilangjeylz.my.id/sitemap.xml',
   }
 }
